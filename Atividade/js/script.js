@@ -420,7 +420,7 @@ const exercicio21 = () => {
   if (texto == "") {
     error.innerText = `Insira uma frase!`;
   } else {
-    let novoTexto = frase.join("");
+    let novoTexto = frase.join(" ");
     result.innerText = `${novoTexto}`;
   }
 };
@@ -428,7 +428,7 @@ const exercicio21 = () => {
 //Atividade 22
 var soma1 = 0;
 const exercicio22 = () => {
-  let num = parseInt(document.getElementById("num").value);
+  let num = parseInt(document.getElementById("num").value); //parseInt ou Number
   let result = document.getElementById("resultado");
   let error = document.getElementById("erro");
   let contador = 0;
@@ -508,7 +508,7 @@ const exercicio25 = () => {
   error.innerHTML = " ";
 
   if (num1 > 0 && num2 > 0 && num3 > 0) {
-    numeros = numeros.sort((a, b) => a - b);
+    numeros = numeros.sort((a, b) => a - b); // sort = ordena os elementos do próprio array e retorna o array (ordem crescente)
 
     for (let i = 0; i < 3; i++) {
       result.innerHTML += `| ${numeros[i]}`;
