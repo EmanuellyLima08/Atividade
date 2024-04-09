@@ -9,12 +9,19 @@ const exercicio1 = () => {
 
 //Atividade 02
 const exercicio2 = () => {
-  let resultado = document.getElementById("resultado");
-  document.getElementById("resposta").innerHTML =
-    "<h2>Resposta da Atividade</h2>";
+  let result = document.getElementById("resultado");
+  let error = document.getElementById("erro");
   let num = document.getElementById("num").value;
-  for (let i = 0; i <= num; i += 2) {
-    document.getElementById("resposta").innerHTML += `| ${i}`;
+
+  if (num < 0) {
+    error.innerHTML = `Insira um número positivo!`;
+    result.innerHTML = " ";
+  } else {
+    result.innerHTML = "";
+    for (let i = 0; i <= num; i += 2) {
+      result.innerHTML += `| ${i}`;
+      error.innerHTML = " ";
+    }
   }
 };
 
@@ -102,6 +109,7 @@ const exercicio6 = () => {
 //Atividade 07
 const exercicio7 = () => {
   //let num = document.getElementById("num").value;
+  contador = 10;
   let resposta = document.getElementById("resposta");
 
   while (contador > 0) {
@@ -109,7 +117,6 @@ const exercicio7 = () => {
     contador--;
   }
 };
-contador = 10;
 
 //Atividade 08
 const exercicio8 = () => {
@@ -153,7 +160,6 @@ const exercicio10 = () => {
   let error = document.getElementById("erro");
   contador = 0;
 
-  //result.innerText = "";
   if (num <= 0) {
     error.innerText = `${num} não é válido! Informar um número positivo!`;
     result.innerText = "";
@@ -208,12 +214,12 @@ const exercicio13 = () => {
   let error = document.getElementById("erro");
   let menor, maior;
 
-  if (num1 < num2) {
-    menor = num1;
-    maior = num2;
+  if (Number(num1) < Number(num2)) {
+    menor = parseInt(num1);
+    maior = parseInt(num2);
   } else {
-    menor = num2;
-    maior = num1;
+    menor = parseInt(num2);
+    maior = parseInt(num1);
   }
 
   if (menor <= 0 || maior <= 0) {
@@ -308,7 +314,7 @@ const exercicio16 = () => {
   error.innerText = "";
 
   if (raio > 0) {
-    let circunf = 2 * Math.PI * raio;
+    let circunf = Math.PI * raio ** 2;
     result.innerHTML = `A área de um círculo com ${raio} de raio é: ${circunf.toFixed(
       2
     )}`;
@@ -373,7 +379,7 @@ const exercicio19 = () => {
       difAnos--;
     }
 
-    console.log(difAnos);
+    //console.log(difAnos);
     result.innerHTML = `O usuário tem ${difAnos} anos!`;
     error.innerHTML = "";
   } else {
@@ -449,16 +455,17 @@ const exercicio23 = () => {
   let palavrasFrase = frase.split(" ");
   let contador = 0;
 
-  for (let i = 0; i < palavrasFrase.length; i++) {
-    if (palavrasFrase[i] === palavra) {
-      contador++;
-    } else {
-      error.innerText = `Preencha os campos!`;
-      result.innerText = "";
+  if (palavra == "" || frase == "") {
+    error.innerText = `Preencha os campos!`;
+  } else {
+    for (let i = 0; i < palavrasFrase.length; i++) {
+      if (palavrasFrase[i] === palavra) {
+        contador++;
+      }
     }
+    result.innerText = `A palavra '${palavra}' apareceu ${contador} vezes na frase!`;
+    error.innerText = "";
   }
-  result.innerText = `A palavra '${palavra}' apareceu ${contador} vezes na frase!`;
-  error.innerText = "";
 };
 
 //Atividade 24
@@ -467,6 +474,46 @@ const exercicio24 = () => {
   let result = document.getElementById("resultado");
   let error = document.getElementById("erro");
 
+  result.innerText = titleCase(frase);
+
+  if (frase === "") {
+    error.innerText = `Insira uma frase!`;
+    result.innerText = "";
+  } else {
+    error.innerText = "";
+    result.innerText = titleCase(frase);
+  }
+};
+
+function titleCase(frase) {
+  return frase
+    .toLowerCase() // letras minúsculas
+    .split(" ") // divide a frase em um array de palavras
+    .map(function (word) {
+      // percorre a cada palavra do array para aplicar a funcão
+      return word.charAt(0).toUpperCase() + word.slice(1); // converte a primeira letra para maiúscula e mantém as outras iguais
+    })
+    .join(" "); //junta novamente as palavras do array (que foram separadas pelo split)
 }
 
 //Atividade 25
+const exercicio25 = () => {
+  let num1 = document.getElementById("num1").value;
+  let num2 = document.getElementById("num2").value;
+  let num3 = document.getElementById("num3").value;
+  let result = document.getElementById("resultado");
+  let error = document.getElementById("erro");
+  let numeros = [num1, num2, num3];
+  result.innerHTML = " ";
+  error.innerHTML = " ";
+
+  if (num1 > 0 && num2 > 0 && num3 > 0) {
+    numeros = numeros.sort((a, b) => a - b);
+
+    for (let i = 0; i < 3; i++) {
+      result.innerHTML += `| ${numeros[i]}`;
+    }
+  } else {
+    error.innerHTML = `Informe um número válido!`;
+  }
+};
